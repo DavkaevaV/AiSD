@@ -20,6 +20,9 @@ int AnalysOfBracket(char *str, int size, int deep, int current)//возвращ�
 						if(current==size-1&&deep==1)//Если вся строка прочитана, а глубина рекурсии == 1 (не равна 0)
 							return -1*current;//то строка - не скобки
 					break;
+					case(' '):
+                                                return current;
+                                        break;
 					case(')'):
 						if(current==size-1 && deep==1 && str[current-1]!=';' && str[current-1]!='(')
 							return current;
@@ -54,7 +57,7 @@ void SyntaxAnalys(char *str)//функция для обработки введ�
 
     while ((str[current] != '\n') &&(str[current] != '\0') && (brackets == 1))//проверка на неверный символ
     {
-        if ((str[current] != ';') && (str[current] != 'A') && (str[current] != '(') && (str[current] != ')'))
+        if ((str[current] != ';') && (str[current] != 'A') && (str[current] != '(') && (str[current] != ')') && (str[current] != ' '))
             brackets=0;
          size++;
          current++;
@@ -87,7 +90,7 @@ void SyntaxAnalys(char *str)//функция для обработки введ�
         	printf("A\n");
         	printf("It is brackets!\n");
         }
-        else if(str[1]!='(')//Если второй символ не '('
+        else if(str[1]!='(' && str[1]!=' ')//Если второй символ не '(' и не ' '
         {
         	printf("%c%c\n",str[0], str[1] );
                 printf("\nIsn't brackets!\n");
